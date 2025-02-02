@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Lab3Test",
+      "setup": "",
+      "run": "mvn test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 100
+    }
+  ]
+}
