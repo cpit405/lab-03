@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "validate": "html-validator ../ || echo 'HTML is not valid'",
-    "test": "node lab2.test.js"
+    "test": "node lab3.test.js"
   },
   "keywords": [],
   "author": "",
