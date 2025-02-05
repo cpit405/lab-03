@@ -9,7 +9,6 @@ let errors = [];
 
 
 // 2. Check for a table with the correct structure and content
-const table = $('table');
 const colorTable = $('table');
 if (colorTable.length === 0) {
     errors.push('No <table> element found');
@@ -20,9 +19,7 @@ if (colorTable.length === 0) {
         const tbody = $(this).find('tbody');
         if (thead.length > 0 && tbody.length > 0) {
             const ths = thead.find('th');
-            if (ths.length === 3 &&
-                ths.eq(1).text().trim() === 'Color' &&
-                ths.eq(2).text().trim() === 'Color when mouse over') {
+            if (ths.length === 3){
                 const rows = tbody.find('tr');
                 if (rows.length === 4) {
                     const expectedValues = [
@@ -35,9 +32,10 @@ if (colorTable.length === 0) {
                     rows.each(function (index) {
                         const cells = $(this).find('td');
                         if (cells.length !== 3 ||
-                            cells.eq(0).text().trim() !== expectedValues[index][0] ||
-                            cells.eq(1).text().trim() !== expectedValues[index][1] ||
-                            cells.eq(2).text().trim() !== expectedValues[index][2]) {
+                            cells.eq(0).text().trim().toLowerCase() !== expectedValues[index][0].toLowerCase() ||
+                            cells.eq(1).text().trim().toLowerCase() !== expectedValues[index][1].toLowerCase() ||
+                            cells.eq(2).text().trim().toLowerCase() !== expectedValues[index][2].toLowerCase()) {
+                                
                             matches = false;
                             return false; // break out of each loop
                         }
@@ -46,12 +44,16 @@ if (colorTable.length === 0) {
                         hasCorrectTable = true;
                         return false; // break out of each loop
                     }
+                }else{
+                    errors.push("Table has ${rows.length} rows, but it should have 4 rows");
                 }
+            } else{
+                errors.push('The <table> should have 3 th elements. Double-check the table headers.');
             }
         }
     });
     if (!hasCorrectTable) {
-        errors.push('No <table> element found with the specified color values');
+        errors.push('Wrong answer to the The <table> question. Some of the answers inside the cells are incorrect. Double-check your responses.');
     }
 }
 
